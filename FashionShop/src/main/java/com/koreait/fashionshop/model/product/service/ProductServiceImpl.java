@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.fashionshop.common.FileManager;
+import com.koreait.fashionshop.exception.ProductRegistException;
 import com.koreait.fashionshop.model.domain.Color;
 import com.koreait.fashionshop.model.domain.Image;
 import com.koreait.fashionshop.model.domain.Product;
@@ -37,8 +38,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public List selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return productDAO.selectAll();
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void regist(FileManager fileManager, Product product) {
+	public void regist(FileManager fileManager, Product product) throws ProductRegistException{
 		
 		String ext=fileManager.getExtend(product.getRepImg().getOriginalFilename());
 		product.setFilename(ext); //확장자 결정
